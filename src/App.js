@@ -1,3 +1,4 @@
+import './App.css';
 import React from 'react';
 import {Menu} from "./components/Menu";
 import {PageHeader} from "./components/PageHeader";

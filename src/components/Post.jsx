@@ -5,7 +5,7 @@ export class Post extends React.Component{
         super(props);
         this.state = {
             text: "",
-            date_added: "",
+            data_added: "",
             author: ""
         }
     }
