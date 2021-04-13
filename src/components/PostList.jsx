@@ -15,7 +15,7 @@ function PreviewPost(props){
             </Link>
             <p className="post-meta">Опубликовал&nbsp;
                 <a href="#">{props.author}</a>&nbsp;
-                {props.date_added}</p>
+                {props.data_added}</p>
         </div>
     )
 }
@@ -38,7 +38,7 @@ export class PostList extends React.Component{
                         title={post.title}
                         text={post.text.slice(0,50)+"..."}
                         author={post.author}
-                        date_added={post.date_added}
+                        data_added={post.data_added}
                         id={post.id}
                     />)
                 })
