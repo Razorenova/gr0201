@@ -1,8 +1,15 @@
 import React from 'react';
 
 export class About extends React.Component{
-    render(){
-        return(
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount() {
+        this.props.changeH1("О нас");
+    }
+
+    render() {
+        return (
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8 col-md-10 mx-auto">
