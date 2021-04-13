@@ -2,82 +2,58 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-function Tr(props) {
-    return <tr>
-        <th scope="row">{props.index} [{props.id}]</th>
-        <td><Link to={"/post/" + props.id}>{props.title}</Link></td>
-        <td>{props.author}</td>
-        <td>{props.data_added}</td>
-        <td><span className='delete-post-btn' onClick={()=> {
-            const formData = new FormData();
-            formData.append('id',props.id);
-            fetch ("http://v90377xk.beget.tech/pre/php/removePost.php", {
-                method: "POST",
-                body: formData
-            }).then(response=>response.json())
-                .then(result=>{
-                    let posts = props.parent.state.posts;
-                    posts.splice(props.index-1,1 ) ;
-                    props.parent.setState({
-                        posts:posts
-                    })
-                })
-        }
-        }>[Удалить]</span></td>
-
-    </tr>
+function PreviewPost(props){
+    return (
+        <div className="post-preview">
+            <Link to={`/post/${props.id}`}>
+                <h2 className="post-title">
+                    {props.title}
+                </h2>
+                <h4 className="post-subtitle">
+                    {props.text}
+                </h4>
+            </Link>
+            <p className="post-meta">Опубликовал&nbsp;
+                <a href="#">{props.author}</a>&nbsp;
+                {props.date_added}</p>
+        </div>
+    )
 }
 
 export class PostList extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             posts: []
         }
     }
     componentDidMount() {
-        console.log("Компонент PostList отрисован");
-
+        this.props.changeH1("Главная страница");
         fetch("http://v90377xk.beget.tech/pre/php/getPosts.php")
-
             .then(response=>response.json())
             .then(result=>{
-                console.log(result);
-                let rows = [];
-                for (let i = 0; i < result.length; i++) {
-                    rows.push(<Tr
-                        key={i}
-                        index={ i + 1}
-                        id={result[i].id}
-                        title={result[i].title}
-                        author={result[i].author}
-                        data_added={result[i].data_added}
-                        parent={this}
+                this.setState({
+                    posts: result.map(post=><PreviewPost
+                        key={post.id}
+                        title={post.title}
+                        text={post.text.slice(0,50)+"..."}
+                        author={post.author}
+                        date_added={post.date_added}
+                        id={post.id}
                     />)
-                }
-                this.setState( {
-                    posts: rows
                 })
-
             })
     }
 
     render() {
-
-        console.log("Компонент PostList рисуется")
-        return <table className="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Заголовок</th>
-                <th scope="col">Автор</th>
-                <th scope="col">Дата добавления</th>
-                <th scope="col">Управление</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.posts}
-            </tbody>
-        </table>
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-8 col-md-10 mx-auto">
+                        {this.state.posts}
+                    </div>
+                </div>
+            </div>
+        )
     }
 }
