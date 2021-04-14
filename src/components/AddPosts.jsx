@@ -2,7 +2,7 @@ import React from 'react';
 import SunEditor from "suneditor-react";
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 
-export class AddPost extends React.Component{
+export class AddPosts extends React.Component{
     constructor(props) {
         super(props);
         this.sunEditorRef = React.createRef();
