@@ -9,24 +9,36 @@ export class AddPost extends React.Component{
             author: ""
         }
         this.handlerInput = this.handlerInput.bind(this);
-
+        this.handlerSubmit = this.handlerSubmit.bind(this);
     }
     componentDidMount() {
         this.props.changeH1("Добавление статьи")
     }
-handlerInput(event){
+    handlerInput(event){
         const name = event.target.name;
         const value = event.target.value;
         this.setState( {
             [name]: value
         })
+    }
+    handlerSubmit(event){
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append( "title",this.state.title)
+        formData.append( "text",this.state.text)
+        formData.append( "author",this.state.author)
+        fetch("http://v90377xk.beget.tech/pre/php/addPost.php",{
+            method: "POST",
+            body: formData
+        }).then(response=>response.json())
+            .then(result=>console.log(result));
 
-}
+    }
     render() {
         return(
             <div className="container">
                 <div className="col-sm-5 mx-auto">
-                    <form action="">
+                    <form onSubmit={this.handlerSubmit}>
                         <div className="mb-3">
                             <input value={this.state.title} onChange={this.handlerInput} name="title" type="text" placeholder="Заголовок" className="form-control"/>
                         </div>
