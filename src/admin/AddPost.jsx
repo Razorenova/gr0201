@@ -1,8 +1,11 @@
 import React from 'react';
+import SunEditor from "suneditor-react";
+import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 
 export class AddPost extends React.Component{
     constructor(props) {
         super(props);
+        this.sunEditorRef = React.createRef()
         this.state = {
             title: "",
             text: "",
@@ -37,13 +40,23 @@ export class AddPost extends React.Component{
     render() {
         return(
             <div className="container">
-                <div className="col-sm-5 mx-auto">
+                <div className="col-sm-8 mx-auto">
                     <form onSubmit={this.handlerSubmit}>
                         <div className="mb-3">
                             <input value={this.state.title} onChange={this.handlerInput} name="title" type="text" placeholder="Заголовок" className="form-control"/>
                         </div>
                         <div className="mb-3">
-                            <textarea value={this.state.text} onChange={this.handlerInput} name="text" placeholder="Статья" className="form-control"/>
+                            <SunEditor
+                                ref={this.sunEditorRef}
+                                name="text"
+                                onChange={(value)=>{
+                                    const name = (this.sunEditorRef.current.props.name);
+                                    this.setState({
+                                        [name]: value
+                                    })
+                                }}
+                                placeholder="Текст статьи"
+                                height="400px"/>
                         </div>
                         <div className="mb-3">
                             <input value={this.state.author} onChange={this.handlerInput} name="author" type="text" placeholder="Автор" className="form-control"/>
