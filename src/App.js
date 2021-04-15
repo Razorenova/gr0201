@@ -9,6 +9,7 @@ import {About} from "./components/About";
 import {Contact} from "./components/Contact";
 import {Post} from "./components/Post";
 import {AddPost} from "./admin/AddPost";
+import {Admin} from "./admin/Admin";
 
 
     class App extends React.Component{
@@ -30,7 +31,7 @@ import {AddPost} from "./admin/AddPost";
                         <Menu/>
                         <PageHeader h1={this.state.h1}/>
                         <Route exact path="/" render={()=><PostList changeH1={this.changeH1}/>}/>
-                        <Route path="/admin" render={()=><AddPost changeH1={this.changeH1}/>}/>
+                        <Route path="/admin" render={()=><Admin changeH1={this.changeH1}/>}/>
                         <Route path="/about" render={()=><About changeH1={this.changeH1}/>}/>
                         <Route path="/contact" render={()=><Contact changeH1={this.changeH1}/>}/>
                         <Route path="/post/:id" render={(props)=><Post changeH1={this.changeH1} {...props} />}/>
