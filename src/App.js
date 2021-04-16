@@ -8,9 +8,8 @@ import {Route,BrowserRouter} from "react-router-dom";
 import {About} from "./components/About";
 import {Contact} from "./components/Contact";
 import {Post} from "./components/Post";
-import {AddPost} from "./admin/AddPost";
 import {Admin} from "./admin/Admin";
-
+import {AddPost} from "./admin/AddPost";
 
     class App extends React.Component{
         constructor() {
