@@ -1,5 +1,6 @@
 import React from 'react';
 import {Auth} from "./Auth";
+import {AddPost} from "./AddPost";
 
 export class Admin extends React.Component{
     constructor(props) {
@@ -10,6 +11,6 @@ export class Admin extends React.Component{
     }
 
     render() {
-        return <Auth/>
+        return <AddPost changeH1={this.props.changeH1}/>
     }
 }
