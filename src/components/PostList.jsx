@@ -41,7 +41,7 @@ export class PostList extends React.Component{
                             title={post.title}
                             text={html.body.innerText.slice(0,50)+"..."}
                             author={post.author}
-                            date_added={post.date_added}
+                            data_added={post.data_added}
                             id={post.id}
                         />})
                 })

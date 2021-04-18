@@ -30,7 +30,7 @@ export class AddPost extends React.Component{
         formData.append( "title",this.state.title)
         formData.append( "text",this.state.text)
         formData.append( "author",this.state.author)
-        fetch("http://v90377xk.beget.tech/pre/php/addPost.php",{
+        fetch("http://v90377xk.beget.tech/pre/php/addPost",{
             method: "POST",
             body: formData
         }).then(response=>response.json())
